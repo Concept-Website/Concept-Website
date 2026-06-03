@@ -225,40 +225,58 @@
       }
 
       aside {
-        width: 250px;
+        width: 320px;
         position: sticky;
         top: 36px;
         height: fit-content;
+        flex-shrink: 0;
       }
       .panel {
         background: var(--card);
-        padding: 18px;
+        padding: 22px;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         border: 1px solid rgba(255, 255, 255, 0.03);
       }
       .panel h3 {
-        margin: 0 0 8px 0;
+        margin: 0 0 16px 0;
+        font-weight: 700;
+        font-size: 19px;
       }
       .specs {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
       }
       .spec {
         display: flex;
         justify-content: flex-start;
         color: #ccc;
-        font-size: 14px;
-        gap: 12px;
+        font-size: 15px;
+        gap: 14px;
+        line-height: 1.4;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .spec:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
       .spec span:first-child {
-        font-weight: 600;
-        min-width: 120px;
+        font-weight: 700;
+        min-width: 90px;
+        flex-shrink: 0;
       }
       .spec span:last-child {
         flex: 1;
         text-align: left;
+        word-wrap: break-word;
+      }
+
+      .spec-value {
+        color: #fff;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       footer {
@@ -303,10 +321,10 @@
         <div class="panel">
           <h3>Snelle info</h3>
           <div class="specs">
-            <div class="spec"><span>Verzending</span><span>1-3 werkdagen (NL)</span></div>
-            <div class="spec"><span>Betaling</span><span>iDEAL, PayPal, Creditcard</span></div>
-            <div class="spec"><span>Garantie</span><span>1-3 jaar</span></div>
-            <div class="spec"><span>Support</span><span>Klantenservice</span></div>
+            <div class="spec"><span>Verzending</span><span class="spec-value">1-3 werkdagen (NL)</span></div>
+            <div class="spec"><span>Betaling</span><span class="spec-value">iDEAL, PayPal, Creditcard</span></div>
+            <div class="spec"><span>Garantie</span><span class="spec-value">1-3 jaar</span></div>
+            <div class="spec"><span>Support</span><span class="spec-value">Klantenservice</span></div>
           </div>
 
           <hr style="border: none; height: 1px; background: rgba(255, 255, 255, 0.03); margin: 12px 0; border-radius: 2px" />
@@ -445,6 +463,7 @@
       const sortSelect = document.getElementById("sort");
       const resetBtn = document.getElementById("reset");
       const productContainer = document.querySelector(".products");
+      const originalOrder = Array.from(productContainer.querySelectorAll(".card"));
 
       sortSelect.addEventListener("change", () => {
         const cards = Array.from(productContainer.querySelectorAll(".card"));
@@ -461,8 +480,7 @@
 
       resetBtn.addEventListener("click", () => {
         sortSelect.value = "default";
-        const cards = Array.from(productContainer.querySelectorAll(".card"));
-        cards.forEach((card) => productContainer.appendChild(card));
+        originalOrder.forEach((card) => productContainer.appendChild(card));
       });
 
       // Redirects
