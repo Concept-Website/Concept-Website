@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>TweeLoop</title>
+    <title>TweeLoop - Premium Rekenmachines</title>
     <meta name="description" content="Professionele rekenmachines voor school, werk en studie. Snelle levering binnen Nederland." />
     <style>
       :root {
@@ -15,77 +15,31 @@
         --shadow: 0 6px 18px rgba(2, 6, 10, 0.6);
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         font-family: Inter, system-ui, Arial;
         background: linear-gradient(180deg, var(--bg), #071014 140%);
         color: #fff;
-        padding: 30px 20px;
-        display: flex;
-        justify-content: center;
-      }
-
-      /* UPDATED: make aside left and cards centered */
-      .site {
-        width: 100%;
-        max-width: 1300px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 40px; /* closer spacing between sidebar and cards */
-      }
-
-      aside {
-        width: 250px;
-        position: sticky;
-        top: 36px;
-        height: fit-content;
-        flex-shrink: 0;
-        margin-left: 0; /* stays near the left */
-      }
-
-      .panel {
-        background: var(--card);
-        padding: 18px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(255, 255, 255, 0.03);
-      }
-
-      .specs {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .spec {
-        display: flex;
-        justify-content: flex-start;
-        color: #ccc;
-        font-size: 14px;
-        gap: 12px;
-      }
-      .spec span:first-child {
-        font-weight: 600;
-        min-width: 120px;
-      }
-      .spec span:last-child {
-        flex: 1;
-        text-align: left;
+        padding-top: 100px;
       }
 
       header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         background: rgba(11, 15, 19, 0.95);
         backdrop-filter: blur(8px);
         z-index: 999;
-        padding: 15px 20px;
+        padding: 15px 30px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 28px;
         width: 100%;
       }
 
@@ -94,392 +48,761 @@
         align-items: center;
         gap: 14px;
       }
+
       .logo {
-        width: 56px;
-        height: 56px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #0b1620, #07202a);
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent), #4bd9a6);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: var(--shadow);
+        font-weight: 800;
+        font-size: 24px;
+        color: #000;
       }
-      h1 {
-        font-size: 20px;
+
+      .brand-info h1 {
+        font-size: 18px;
         margin: 0;
         color: #fff;
       }
-      .tag {
-        color: #fff;
-        font-size: 13px;
+
+      .brand-info .tag {
+        color: #aaa;
+        font-size: 12px;
+        margin: 0;
       }
 
       nav {
         display: flex;
-        gap: 12px;
+        gap: 20px;
         align-items: center;
         color: #fff;
       }
-      .btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        padding: 8px 12px;
-        border-radius: 10px;
-        font-weight: 600;
-        cursor: pointer;
-        color: #ffffff;
-      }
-      .btn:active {
-        transform: translateY(1px);
-      }
-      .search {
+
+      .search-box {
         display: flex;
         gap: 12px;
         align-items: center;
-        background: var(--card);
-        padding: 10px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.03);
-        box-shadow: var(--shadow);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
-      .search input {
+
+      .search-box input {
         background: transparent;
         border: 0;
         outline: none;
-        font-size: 15px;
+        font-size: 14px;
         color: #fff;
-      }
-      .controls {
-        display: flex;
-        gap: 12px;
+        width: 180px;
       }
 
-      .quick-info {
-        background: #11171c;
+      .search-box input::placeholder {
+        color: #666;
+      }
+
+      .nav-btn {
+        background: transparent;
         border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        padding: 12px 20px;
-        margin-bottom: 26px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #fff;
+        font-size: 13px;
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .quick-bar {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: rgba(17, 23, 28, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 998;
+        padding: 16px 30px;
+      }
+
+      .quick-bar-content {
+        max-width: 1400px;
+        margin: 0 auto;
         display: flex;
         justify-content: space-around;
-        align-items: center;
+        gap: 30px;
         flex-wrap: wrap;
-        text-align: center;
-        font-size: 14px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
       }
-      .quick-info div {
-        color: #ddd;
+
+      .quick-item {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin: 4px 0;
-      }
-      .quick-info svg {
-        width: 18px;
-        height: 18px;
-        stroke: var(--accent);
-      }
-
-      main {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-      }
-
-      .products {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap);
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .card {
-        background: var(--card);
-        padding: 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 8px 30px rgba(2, 6, 10, 0.5);
-        color: #fff;
-        display: flex;
-        flex-direction: column;
         gap: 12px;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 30px rgba(6, 255, 180, 0.2);
-      }
-      .card img {
-        width: 100%;
-        height: 200px;
-        object-fit: contain;
-        background: linear-gradient(180deg, #081217, #071015);
-        border-radius: 8px;
-        padding: 8px;
-      }
-      .meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .info {
-        flex: 1;
-        min-width: 0;
-      }
-      .title {
-        font-weight: 700;
-        color: #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .subtitle {
+        font-size: 14px;
         color: #ccc;
-        font-size: 13px;
-        margin-top: 6px;
-      }
-      .price {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--accent);
-        white-space: nowrap;
-        margin-left: 10px;
       }
 
-      .actions {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
+      .quick-item svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--accent);
+        flex-shrink: 0;
       }
-      .primary {
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 60px 30px;
+        margin-bottom: 40px;
+      }
+
+      .hero h2 {
+        font-size: 48px;
+        font-weight: 800;
+        margin: 0 0 16px 0;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 16px;
+        color: #aaa;
+        margin: 0 0 28px 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-btn {
         background: linear-gradient(90deg, var(--accent), #4bd9a6);
         border: 0;
-        padding: 10px 12px;
+        padding: 14px 28px;
         border-radius: 10px;
         font-weight: 700;
         cursor: pointer;
         color: #000;
+        font-size: 15px;
+        transition: transform 0.2s ease;
       }
 
-      footer {
-        margin-top: 40px;
-        color: #888;
-        font-size: 13px;
+      .hero-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 40px 0 30px 0;
         text-align: center;
       }
 
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 60px;
       }
 
-      @media (max-width: 1000px) {
-        .site {
-          flex-direction: column;
-          align-items: center;
+      .product-card {
+        background: var(--card);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 40px rgba(110, 231, 183, 0.15);
+        border-color: var(--accent);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--accent);
+        color: #000;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        z-index: 10;
+      }
+
+      .product-image {
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(180deg, #081217, #071015);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 16px;
+      }
+
+      .product-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .product-info {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .product-brand {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 700;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+
+      .product-name {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .product-desc {
+        font-size: 13px;
+        color: #aaa;
+        margin-bottom: 14px;
+        flex: 1;
+        line-height: 1.4;
+      }
+
+      .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .product-price {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .product-btn {
+        background: linear-gradient(90deg, var(--accent), #4bd9a6);
+        border: 0;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        color: #000;
+        font-size: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .product-btn:hover {
+        transform: scale(1.05);
+      }
+
+      .benefits {
+        background: rgba(17, 23, 28, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 40px 30px;
+        margin: 60px 0;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .benefit-item {
+        text-align: center;
+      }
+
+      .benefit-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(110, 231, 183, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+      }
+
+      .benefit-icon svg {
+        width: 32px;
+        height: 32px;
+        stroke: var(--accent);
+      }
+
+      .benefit-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .benefit-text {
+        font-size: 13px;
+        color: #aaa;
+        line-height: 1.5;
+      }
+
+      footer {
+        background: rgba(11, 15, 19, 0.8);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 50px 30px 30px;
+        margin-top: 80px;
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-section h3 {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-section li {
+        margin-bottom: 12px;
+        font-size: 13px;
+        color: #aaa;
+        line-height: 1.6;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 12px;
+        color: #666;
+      }
+
+      .footer-bottom a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-bottom a:hover {
+        color: #fff;
+      }
+
+      @media (max-width: 1200px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
-        aside {
-          position: relative;
-          width: 100%;
-        }
-        .products {
+        .benefits-grid {
           grid-template-columns: repeat(2, 1fr);
         }
       }
 
-      @media (max-width: 600px) {
-        .products {
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          gap: 12px;
+          padding: 12px 16px;
+        }
+
+        nav {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .search-box {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .search-box input {
+          width: 100%;
+        }
+
+        .quick-bar {
+          padding: 12px 16px;
+          top: 100px;
+        }
+
+        .quick-bar-content {
+          gap: 12px;
+        }
+
+        .quick-item {
+          font-size: 12px;
+        }
+
+        body {
+          padding-top: 150px;
+        }
+
+        .hero h2 {
+          font-size: 32px;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        .benefits-grid {
           grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 30px 16px;
+        }
+
+        .container {
+          padding: 0 16px;
+        }
+
+        header {
+          padding: 10px 12px;
+        }
+
+        .quick-bar {
+          padding: 10px 12px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="site">
-      <aside>
-        <div class="panel">
-          <h3>Snelle info</h3>
-          <div class="specs">
-            <div class="spec"><span>Verzending</span><span>1–3 werkdagen (NL)</span></div>
-            <div class="spec"><span>Betaling</span><span>iDEAL, PayPal, Creditcard</span></div>
-            <div class="spec"><span>Garantie</span><span>1–3 jaar</span></div>
-            <div class="spec"><span>Support</span><span>Klantenservice</span></div>
-          </div>
-
-          <hr style="border: none; height: 1px; background: rgba(255, 255, 255, 0.03); margin: 12px 0; border-radius: 2px" />
-          <h3>Filter</h3>
-          <div style="display: flex; gap: 8px; margin-top: 8px">
-            <select id="sort" style="flex: 1; padding: 8px; border-radius: 8px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.03); color: inherit">
-              <option value="default">Standaard</option>
-              <option value="price-asc">Prijs laag → hoog</option>
-              <option value="price-desc">Prijs hoog → laag</option>
-            </select>
-            <button class="btn" id="reset">Reset</button>
-          </div>
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="logo">⌘</div>
+        <div class="brand-info">
+          <h1>TweeLoop</h1>
+          <p class="tag">Premium Rekenmachines</p>
         </div>
-      </aside>
-
-      <div style="flex: 1">
-        <header>
-          <div class="brand">
-            <div class="logo">
-              <img src="recources/images/TweeLoop_Logo.png" alt="TweeLoop Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px" />
-            </div>
-            <div>
-              <h1>Loop</h1>
-              <div class="tag">Hoge Kwaliteit Producten</div>
-            </div>
-          </div>
-          <nav>
-            <div class="search" role="search" aria-label="Zoek rekenmachines">
-              <input id="q" placeholder="Zoek" />
-            </div>
-            <div class="controls">
-              <button class="btn">Winkelmandje</button>
-            </div>
-          </nav>
-        </header>
-
-        <div class="quick-info">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-            Garantie tot 3 jaar
-          </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path d="M3 3h18v18H3z" />
-            </svg>
-            Nog Iets Leuks
-          </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
-              <path d="M12 1v22M1 12h22" />
-            </svg>
-            Altijd goede kwaliteit
-          </div>
+      </div>
+      <nav>
+        <div class="search-box">
+          <input type="text" placeholder="Zoek rekenmachines..." />
         </div>
+        <button class="nav-btn">Winkelwagen</button>
+      </nav>
+    </header>
 
-        <main>
-          <div class="products">
-            <article class="card" data-price="69.99">
-              <img src="recources/images/Ti-84_Plus_CE-T-1.png" alt="TI-84 Plus CE-T grafische rekenmachine" />
-              <div class="meta">
-                <div class="info">
-                  <div class="title">TI-84 Plus CE-T</div>
-                  <div class="subtitle">Grafische rekenmachine - Met oplaadbare batterij</div>
-                </div>
-                <div class="price">€69,99 - €89,99</div>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px">
-                <div class="actions"><button class="primary">Koop nu</button></div>
-                <div style="color: #ffffff; font-size: 13px"><strong>Uitverkocht</strong></div>
-              </div>
-            </article>
-
-            <article class="card" data-price="79.99">
-              <img src="recources/images/Ti-84_Plus_CE-T_Python-1.png" alt="TI-84 Plus CE-T grafische rekenmachine Python Editie" />
-              <div class="meta">
-                <div class="info">
-                  <div class="title">TI-84 Plus CE-T Python</div>
-                  <div class="subtitle">Grafische rekenmachine - Python Editie</div>
-                </div>
-                <div class="price">€79,99 - €99,99</div>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px">
-                <div class="actions"><button class="primary">Koop nu</button></div>
-                <div style="color: #ffffff; font-size: 13px"><strong>Uitverkocht</strong></div>
-              </div>
-            </article>
-
-            <article class="card" data-price="79.99">
-              <img src="recources/images/Casio_FX-CG50-1.png" alt="Casio fx-CG50 grafische rekenmachine" />
-              <div class="meta">
-                <div class="info">
-                  <div class="title">Casio - fx-CG50</div>
-                  <div class="subtitle">Grafische rekenmachine - Casio fx-CG50</div>
-                </div>
-                <div class="price">€69,99 - €89,99</div>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px">
-                <div class="actions"><button class="primary">Koop nu</button></div>
-                <div style="color: #ffffff; font-size: 13px"><strong>Uitverkocht</strong></div>
-              </div>
-            </article>
-
-            <article class="card" data-price="2.99">
-              <img src="recources/images/Oplader_Mini-Usba-1.png" alt="Oplader voor rekenmachines" />
-              <div class="meta">
-                <div class="info">
-                  <div class="title">Oplader</div>
-                  <div class="subtitle">Oplader voor rekenmachines - Usb Mini naar Usb-a</div>
-                </div>
-                <div class="price">€2,99</div>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px">
-                <div class="actions"><button class="primary">Koop nu</button></div>
-                <div style="color: #ffffff; font-size: 13px"><strong>Uitverkocht</strong></div>
-              </div>
-            </article>
-          </div>
-        </main>
-
-        <footer>
-          <span id="year"></span> TweeLoop - Alle rechten voorbehouden -
-          <a href="algemene_voorwaarden.html">Algemene Voorwaarden</a>
-        </footer>
+    <!-- Quick Info Bar -->
+    <div class="quick-bar">
+      <div class="quick-bar-content">
+        <div class="quick-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M5 12h14" />
+          </svg>
+          Garantie tot 3 jaar
+        </div>
+        <div class="quick-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M3 3h18v18H3z" />
+          </svg>
+          Snelle verzending (1-3 dagen)
+        </div>
+        <div class="quick-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M12 1v22M1 12h22" />
+          </svg>
+          30 dagen geld terug
+        </div>
       </div>
     </div>
 
-    <script>
-      document.getElementById("year").innerText = new Date().getFullYear();
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Instrumenten gebouwd voor precisie</h2>
+      <p>Professionele rekenmachines voor school, werk en studie. Gratis verzending boven €75.</p>
+      <button class="hero-btn">Bekijk onze collectie</button>
+    </section>
 
-      const sortSelect = document.getElementById("sort");
-      const resetBtn = document.getElementById("reset");
-      const productContainer = document.querySelector(".products");
+    <!-- Products Section -->
+    <div class="container">
+      <h3 class="section-title">Kies jouw instrument</h3>
+      
+      <div class="products-grid">
+        <!-- Product 1 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <span class="product-badge">OPEN SOURCE</span>
+            <div class="product-image">
+              <img src="recources/images/Ti-84_Plus_CE-T-1.png" alt="NumWorks Grafische Rekenmachine" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">NumWorks</div>
+            <h4 class="product-name">NumWorks N0115</h4>
+            <p class="product-desc">Open-source grafische rekenmachine met Python-ondersteuning en kleurenscherm.</p>
+            <div class="product-footer">
+              <span class="product-price">€89,95</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
 
-      sortSelect.addEventListener("change", () => {
-        const cards = Array.from(productContainer.querySelectorAll(".card"));
-        let sorted;
-        if (sortSelect.value === "price-asc") {
-          sorted = cards.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
-        } else if (sortSelect.value === "price-desc") {
-          sorted = cards.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
-        } else {
-          sorted = cards;
-        }
-        sorted.forEach((card) => productContainer.appendChild(card));
-      });
+        <!-- Product 2 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <span class="product-badge">BESTSELLER</span>
+            <div class="product-image">
+              <img src="recources/images/Ti-84_Plus_CE-T-1.png" alt="TI-84 Plus CE" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">Texas Instruments</div>
+            <h4 class="product-name">TI-84 Plus CE</h4>
+            <p class="product-desc">De klassestandaard – dunne, lichte en aanvaard op examens.</p>
+            <div class="product-footer">
+              <span class="product-price">€119,50</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
 
-      resetBtn.addEventListener("click", () => {
-        sortSelect.value = "default";
-        const cards = Array.from(productContainer.querySelectorAll(".card"));
-        cards.forEach((card) => productContainer.appendChild(card));
-      });
+        <!-- Product 3 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <div class="product-image">
+              <img src="recources/images/Ti-84_Plus_CE-T_Python-1.png" alt="TI-84 Plus CE Python" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">Texas Instruments</div>
+            <h4 class="product-name">TI-84 Plus CE Python</h4>
+            <p class="product-desc">De kracht van CE met ingebouwde Python-editor voor modern leren.</p>
+            <div class="product-footer">
+              <span class="product-price">€134,95</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
 
-      document.querySelectorAll(".card").forEach((card) => {
-        const btn = card.querySelector(".primary");
-        const title = card.querySelector(".title").innerText;
+        <!-- Product 4 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <span class="product-badge">3D GRAFISCH</span>
+            <div class="product-image">
+              <img src="recources/images/Casio_FX-CG50-1.png" alt="Casio fx-CG50 PRIZM" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">Casio</div>
+            <h4 class="product-name">fx-CG50 PRIZM</h4>
+            <p class="product-desc">Natuurlijk weergave, 3D-grafieken en Python in Casio's vlaggenschip.</p>
+            <div class="product-footer">
+              <span class="product-price">€127,50</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
 
-        btn.addEventListener("click", () => {
-          if (title.includes("TI-84 Plus CE-T Python")) {
-            window.location.href = "Producten/TI-84_Plus_CE-T_Python.html";
-          } else if (title.includes("TI-84 Plus CE-T")) {
-            window.location.href = "Producten/TI-84_Plus_CE-T.html";
-          } else if (title.includes("Casio - fx-CG50")) {
-            window.location.href = "Producten/Casio_-_fx-CG50.html";
-          } else if (title.includes("Oplader")) {
-            window.location.href = "Producten/Oplader_Mini-Usba.html";
-          }
-        });
-      });
-    </script>
+        <!-- Product 5 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <div class="product-image">
+              <img src="recources/images/Oplader_Mini-Usba-1.png" alt="USB-C Oplaadkabel" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">ACCESSOIRES</div>
+            <h4 class="product-name">USB-C Oplaadkabel</h4>
+            <p class="product-desc">Gevlochten 1,5m USB-C naar USB-A kabel voor NumWorks en TI-84.</p>
+            <div class="product-footer">
+              <span class="product-price">€9,95</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 6 (Extra) -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <div class="product-image">
+              <img src="recources/images/Ti-84_Plus_CE-T_Python-1.png" alt="Beschermhoes" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">ACCESSOIRES</div>
+            <h4 class="product-name">Beschermhoes Premium</h4>
+            <p class="product-desc">Zachte, duurzame hoes met ritssluiting voor alle rekenmachines.</p>
+            <div class="product-footer">
+              <span class="product-price">€14,95</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 7 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <span class="product-badge">POPULAIR</span>
+            <div class="product-image">
+              <img src="recources/images/Casio_FX-CG50-1.png" alt="HP Prime" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">HP</div>
+            <h4 class="product-name">HP Prime G2</h4>
+            <p class="product-desc">Geavanceerde grafische calculator met touchscreen en color display.</p>
+            <div class="product-footer">
+              <span class="product-price">€139,99</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 8 -->
+        <article class="product-card">
+          <div style="position: relative; width: 100%;">
+            <div class="product-image">
+              <img src="recources/images/Oplader_Mini-Usba-1.png" alt="Batterijen" />
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">ACCESSOIRES</div>
+            <h4 class="product-name">AA Batterijen (4-pack)</h4>
+            <p class="product-desc">Langdurige alkaline batterijen voor rekenmachines.</p>
+            <div class="product-footer">
+              <span class="product-price">€4,99</span>
+              <button class="product-btn">Bekijk details</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="container">
+      <div class="benefits">
+        <h3 class="section-title">Waarom TweeLoop kiezen?</h3>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h4 class="benefit-title">Snelle Levering</h4>
+            <p class="benefit-text">1–2 dagen in Nederland. Gratis verzending boven €75.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h4 class="benefit-title">2 Jaar Garantie</h4>
+            <p class="benefit-text">Volledige dekking op alle producten tegen defecten.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M3 10h18M7 15h1m4 0h1m4 0h1M3 21h18a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h4 class="benefit-title">30 Dagen Retour</h4>
+            <p class="benefit-text">Geen vragen gesteld. Volledige terugbetaling gegarandeerd.</p>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M12 8c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm0 2c-2.761 0-5 2.239-5 5v2h10v-2c0-2.761-2.239-5-5-5zm0 12c-2.761 0-5 2.239-5 5v1h10v-1c0-2.761-2.239-5-5-5z" />
+              </svg>
+            </div>
+            <h4 class="benefit-title">Veilig Betalen</h4>
+            <p class="benefit-text">iDEAL, PayPal en Creditcard. 100% beveiligd.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Verzending</h3>
+          <ul>
+            <li>Nederland: 1–2 werkdagen</li>
+            <li>Europa: 3–5 werkdagen</li>
+            <li>Gratis boven €75</li>
+            <li>Volg je bestelling</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Betaling</h3>
+          <ul>
+            <li>iDEAL</li>
+            <li>PayPal</li>
+            <li>Visa & Mastercard</li>
+            <li>Veilig en versleuteld</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Klantenservice</h3>
+          <ul>
+            <li>2 jaar garantie</li>
+            <li>30 dagen retour</li>
+            <li>hallo@tweeloop.nl</li>
+            <li>+31 (0)6 12345678</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 TweeLoop — Alle rechten voorbehouden | <a href="algemene_voorwaarden.html">Algemene Voorwaarden</a></p>
+      </div>
+    </footer>
   </body>
 </html>
